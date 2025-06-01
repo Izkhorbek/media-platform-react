@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@theme{
+    --color-primary: #1C7C54;
+    --color-secondary: #F4A300;
+}
+
+
+/* Custom CSS */
+.scrollbar-invisible {
+    scrollbar-width: none; /* FireBox*/
+    -ms-overflow-style: none; /* IE 10+*/
+}
+
+.scrollbar-invisible::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
