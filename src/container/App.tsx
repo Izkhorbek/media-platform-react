@@ -1,14 +1,11 @@
-import { Routes } from "react-router-dom";
-import "./../App.scss";
-
+import { CssBaseline } from "@mui/material";
+import Router from "../router/router";
 function App() {
   return (
-    <Routes>
-      {/* Example routes, replace with your actual pages */}
-      {/* <Route path="/" element={<Home />} /> */}
-      {/* <Route path="/about" element={<About />} /> */}
-      {/* <Route path="/contact" element={<Contact />} /> */}
-    </Routes>
+    <>
+      <CssBaseline />
+      <Router />
+    </>
   );
 }
 

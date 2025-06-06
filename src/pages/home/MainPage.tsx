@@ -1,7 +1,7 @@
-import Navbar from "../../components/Navbar";
+import NavbarComponent from "../../components/NavbarComponent";
 import SearchComponent from "../../components/SearchComponent";
 
-const Tags: string[] = ["tag1", "tag2", "tag3", "tag1", "tag2", "tag3"];
+const Tags: string[] = ["tag1", "tag2", "tag3", "tag4", "tag5"];
 
 function MainPage() {
   return (
@@ -12,11 +12,13 @@ function MainPage() {
           <SearchComponent placeholder="Search" tags={Tags} />
         </div>
       </div>
-      {/* Navigation, Categories and Corousel */}
-      <div className="flex  h-[478px] bg-[#96FD87] relative">
-        {/* Slider Navbar */}
-        <Navbar></Navbar>
+      {/* Navigation, Categories and Carousel */}
+      <div className="flex h-[478px] bg-[#96FD87] relative">
         {/* Slider */}
+        {/* Slider Navbar */}
+        <div className="flex max-h-[50px] mt-2  px-[40px] ">
+          <NavbarComponent />
+        </div>
         {/* Slider Footer Reklama */}
       </div>
       {/* Hot Products and  */}
