@@ -11,11 +11,12 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
-import { categories, type INavbarItem } from "../constants";
+// Update the import path below to the actual location of your constants file, for example:
+import { categories, type INavbarItem } from "@/constants";
 
 function NavbarComponent() {
   const [value, setValue] = useState(0);
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const handleCategoriesCollapse = () => {
     setValue(-1);

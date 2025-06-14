@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@import 'swiper/css' ;
+@import 'swiper/css/pagination' ;
+@import 'swiper/css/effect-fade';
 
 @theme{
     --color-primary: #1C7C54;

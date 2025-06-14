@@ -4,9 +4,6 @@
     {
       "path": "./tsconfig.app.json"
     },
-    {
-      "path": "./tsconfig.node.json"
-    }
   ],
   "compilerOptions": {
     "importHelpers": true,
@@ -15,14 +12,15 @@
     "moduleResolution": "node",
     "outDir": "dist",
     "sourceMap": false,
-    "baseUrl": ".",
     "types": [
-      "node",
+      "node"
     ],
+    // Aliases
+    "baseUrl": ".",
     "paths": {
       "@/*": [
         "src/*"
       ]
-    },
+    }
   }
 }

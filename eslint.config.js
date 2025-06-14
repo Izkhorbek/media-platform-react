@@ -8,6 +8,14 @@ export default [
     languageOptions: { globals: globals.browser },
     files: ["**/*.{js,jsx,ts,tsx}"],
     plugins: { prettier: pluginPrettier },
+    extends: [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:prettier/recommended" // Prettier bilan integratsiya
+    ],
+    parser: "@typescript-eslint/parser",
+    plugins: ["react", "@typescript-eslint", "prettier"],
     rules: {
       ...pluginJs.configs.recommended.rules,
       'prettier/prettier': 'error',
@@ -28,6 +36,11 @@ export default [
       'arrow-spacing': ['error', { 'before': true, 'after': true }],
       'space-infix-ops': 'error',
     },
+    settings: {
+    react: {
+      "version": "detect"
+    }
+  }
   },
   prettier,
 ]

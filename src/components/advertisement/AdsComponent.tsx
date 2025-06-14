@@ -16,7 +16,7 @@ function AdsComponent(props: {
       <div className={`w-full h-[60px] relative ${props.adClassName} `}>
         <div onClick={() => handleSrcClick()} className="width-full h-full">
           <img
-            src={props.imgSrc ?? "./public/image/Group 3.svg"}
+            src={props.imgSrc ?? "/image/Group 3.svg"}
             alt={props.imgAlt ?? "Advertisement"}
             className="w-full h-full object-cover cursor-pointer"
           />
