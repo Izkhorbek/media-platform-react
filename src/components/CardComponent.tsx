@@ -1,16 +1,10 @@
 import { CardActions, CardMedia, IconButton, Typography } from '@mui/material'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import Card from '@mui/material/Card'
+import type { ICardComponentProps } from '@/interface/ICardComponentProps'
 
-interface CardComponentProps {
-      image?: string
-      title: string
-      price: string
-      quantity: string
-      onClickLiked?: () => void
-}
 
-function CardComponent({ props }: CardComponentProps) {
+function CardComponent({ props }: ICardComponentProps) {
       return (
             <Card
                   sx={{

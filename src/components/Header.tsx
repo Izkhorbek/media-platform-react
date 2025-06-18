@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 function Header() {
   return (
     <>
-      <div className="flex justify-between items-center h-[76px] px-14 text-white">
+      <div className="flex justify-between items-center h-[76px] px-14 text-white ">
         <div className="flex items-center text-primary">
           <span className="text-[40px] font-bold">Mahalliy Market</span>
         </div>
