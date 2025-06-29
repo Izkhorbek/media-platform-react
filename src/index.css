@@ -8,7 +8,9 @@
     --color-secondary: #F4A300;
 }
 
-
+.container{
+    @apply box-border mx-auto px-2 sm:px-4 lg:px-6;
+}
 /* Custom CSS */
 .scrollbar-invisible {
     scrollbar-width: none; /* FireBox*/

@@ -74,7 +74,7 @@ function HorizontalCardComponent() {
                               },
                         }}
                         component="img"
-                        image="/image/width_800.jpg"
+                        image="/images/width_800.jpg"
                         alt=""
                   />
 
