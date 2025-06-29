@@ -1,22 +1,35 @@
-@import "tailwindcss";
-@import 'swiper/css' ;
-@import 'swiper/css/pagination' ;
+@import 'tailwindcss';
+@import 'swiper/css';
+@import 'swiper/css/pagination';
 @import 'swiper/css/effect-fade';
-
-@theme{
-    --color-primary: #1C7C54;
-    --color-secondary: #F4A300;
+@import 'swiper/css/navigation';
+@import 'swiper/css/effect-cube';
+@theme {
+   --color-primary: #1c7c54;
+   --color-secondary: #f4a300;
 }
 
-.container{
-    @apply box-border mx-auto px-2 sm:px-4 lg:px-6;
+.container {
+   @apply box-border mx-auto px-2 sm:px-4 lg:px-6;
 }
 /* Custom CSS */
 .scrollbar-invisible {
-    scrollbar-width: none; /* FireBox*/
-    -ms-overflow-style: none; /* IE 10+*/
+   scrollbar-width: none; /* FireBox*/
+   -ms-overflow-style: none; /* IE 10+*/
 }
 
 .scrollbar-invisible::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera*/
+   display: none; /* Chrome, Safari, Opera*/
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+   border: 1px solid var(--color-gray-400);
+   padding: 25px;
+   background-color: var(--color-gray-100);
+}
+
+.swiper-button-next,
+.swiper-button-prev:after {
+   color: var(--color-gray-800);
 }

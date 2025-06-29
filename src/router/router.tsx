@@ -8,6 +8,10 @@ const MainLayout = React.lazy(() => import('@/layout/MainLayout'));
 const CategoryProducts = React.lazy(
    () => import('@/pages/category-products/CategoryProducts'),
 );
+const NotFound = React.lazy(() => import('@/pages/NotFound'));
+const SearchResults = React.lazy(
+   () => import('@/pages/search-result/SearchResult'),
+);
 // This is the main router file for the application
 const router = createBrowserRouter([
    {
@@ -24,6 +28,14 @@ const router = createBrowserRouter([
          {
             path: '/category/:id',
             Component: CategoryProducts,
+         },
+         {
+            path: '/search',
+            Component: SearchResults,
+         },
+         {
+            path: '*',
+            Component: NotFound,
          },
       ],
    },

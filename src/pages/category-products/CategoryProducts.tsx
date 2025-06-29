@@ -1,13 +1,23 @@
 import CardComponent from '@/components/CardComponent';
-import ImageWrapper from '@/components/ImageWrapper';
 import { categories } from '@/constants';
 import type { ICardComponentProps } from '@/interface/ICardComponentProps';
-import { NavigateBefore } from '@mui/icons-material';
-import { Box, Link, Pagination } from '@mui/material';
-import { Autoplay, EffectFade } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { LocalFireDepartment, NavigateBefore, Star } from '@mui/icons-material';
+import { Box, Icon, Link, Typography } from '@mui/material';
+
+import { Navigation } from 'swiper/modules';
+import SwiperComponent from '@/components/SwiperComponent';
 
 const products: ICardComponentProps[] = [
+   {
+      imageUrl: 'width_800.jpg',
+      title: 'Lizard',
+      description: 'Lizard is a common pet',
+      price: '1000',
+      quantity: '10',
+      onClickLiked: () => {
+         console.log('Liked');
+      },
+   },
    {
       imageUrl: 'width_800.jpg',
       title: 'Lizard',
@@ -106,26 +116,44 @@ function CategoryProducts() {
             Category Name
          </div>
 
-         {/* Products List */}
-         <Box sx={{ width: '100%', height: '100%' }}>
-            <Swiper
-               slidesPerView={1}
-               effect={'fade'}
-               autoplay={{
-                  delay: 4000,
-                  disableOnInteraction: false,
+         {/* Products List by category */}
+         <Box
+            sx={{
+               width: '100%',
+               height: '100%',
+               display: 'flex',
+               flexDirection: 'column',
+               gap: 2,
+               marginBlock: 8,
+            }}
+         >
+            {/* Hot Products */}
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+               <LocalFireDepartment color="error" />
+               <Typography variant="h5" color="error">
+                  Hot Products
+               </Typography>
+            </Box>
+            <Box
+               sx={{
+                  width: '100%',
+                  height: '100%',
+                  display: 'flex',
+                  border: '1px solid #ccc',
                }}
-               fadeEffect={{
-                  crossFade: true,
-               }}
-               navigation={true}
-               pagination={{ clickable: true }}
-               loop={true}
-               modules={[Autoplay, EffectFade]}
             >
-               {products.map((slide) => (
-                  <SwiperSlide key={slide.title}>
+               <SwiperComponent
+                  props={{
+                     slidesPerView: 5,
+                     spaceBetween: 30,
+                     navigation: true,
+                     loop: false,
+                     modules: [Navigation],
+                  }}
+               >
+                  {products.map((slide) => (
                      <CardComponent
+                        key={slide.title}
                         imageUrl={slide.imageUrl}
                         title={slide.title}
                         description={slide.description}
@@ -133,9 +161,138 @@ function CategoryProducts() {
                         quantity={slide.quantity}
                         onClickLiked={slide.onClickLiked}
                      />
-                  </SwiperSlide>
-               ))}
-            </Swiper>
+                  ))}
+               </SwiperComponent>
+            </Box>
+
+            {/* Best Seller */}
+            <Box
+               sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 1,
+               }}
+            >
+               <Star color="warning" />
+               <Typography variant="h5" color="warning">
+                  Best Seller
+               </Typography>
+            </Box>
+            <Box
+               sx={{
+                  width: '100%',
+                  height: '100%',
+                  display: 'flex',
+               }}
+            >
+               <SwiperComponent
+                  props={{
+                     slidesPerView: 5,
+                     spaceBetween: 30,
+                     navigation: true,
+                     loop: false,
+                     modules: [Navigation],
+                  }}
+               >
+                  {products.map((slide) => (
+                     <CardComponent
+                        key={slide.title}
+                        imageUrl={slide.imageUrl}
+                        title={slide.title}
+                        description={slide.description}
+                        price={slide.price}
+                        quantity={slide.quantity}
+                        onClickLiked={slide.onClickLiked}
+                     />
+                  ))}
+               </SwiperComponent>
+            </Box>
+
+            {/* Promoted recently */}
+            <Box
+               sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 1,
+               }}
+            >
+               <Star color="success" />
+               <Typography variant="h5" color="success">
+                  Promoted recently
+               </Typography>
+            </Box>
+            <Box
+               sx={{
+                  width: '100%',
+                  height: '100%',
+                  display: 'flex',
+               }}
+            >
+               <SwiperComponent
+                  props={{
+                     slidesPerView: 5,
+                     spaceBetween: 30,
+                     navigation: true,
+                     loop: false,
+                     modules: [Navigation],
+                  }}
+               >
+                  {products.map((slide) => (
+                     <CardComponent
+                        key={slide.title}
+                        imageUrl={slide.imageUrl}
+                        title={slide.title}
+                        description={slide.description}
+                        price={slide.price}
+                        quantity={slide.quantity}
+                        onClickLiked={slide.onClickLiked}
+                     />
+                  ))}
+               </SwiperComponent>
+            </Box>
+
+            {/* New Arrival */}
+            <Box
+               sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 1,
+               }}
+            >
+               <Star color="success" />
+               <Typography variant="h5" color="success">
+                  New Arrival
+               </Typography>
+            </Box>
+            <Box
+               sx={{
+                  width: '100%',
+                  height: '100%',
+                  display: 'flex',
+               }}
+            >
+               <SwiperComponent
+                  props={{
+                     slidesPerView: 5,
+                     spaceBetween: 30,
+                     navigation: true,
+                     loop: false,
+                     modules: [Navigation],
+                  }}
+               >
+                  {products.map((slide) => (
+                     <CardComponent
+                        key={slide.title}
+                        imageUrl={slide.imageUrl}
+                        title={slide.title}
+                        description={slide.description}
+                        price={slide.price}
+                        quantity={slide.quantity}
+                        onClickLiked={slide.onClickLiked}
+                     />
+                  ))}
+               </SwiperComponent>
+            </Box>
          </Box>
       </Box>
    );
