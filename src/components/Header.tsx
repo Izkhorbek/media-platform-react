@@ -6,7 +6,7 @@ function Header() {
          <div className="flex items-center text-primary">
             <span className="text-[40px] font-bold">Mahalliy Market</span>
          </div>
-         <div className="flex items-center gap-8 border border-white">
+         <div className="flex items-center gap-8 ">
             <Button
                variant="contained"
                style={{

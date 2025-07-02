@@ -2,14 +2,31 @@ import { Outlet } from 'react-router';
 import { AdsComponent, Header } from '../components/index';
 import { Box, IconButton } from '@mui/material';
 import { Facebook, Instagram, LinkedIn } from '@mui/icons-material';
+import React, { useEffect } from 'react';
 
 function MainLayout() {
+   const [scrolled, setScrolled] = React.useState(false);
+
+   useEffect(() => {
+      const handleScroll = () => {
+         setScrolled(window.scrollY > 0);
+      };
+
+      window.addEventListener('scroll', handleScroll);
+
+      // DidUnMount
+      return () => {
+         window.removeEventListener('scroll', handleScroll);
+      };
+   });
    return (
       <>
          {/* Advertisement */}
          <div className="width-full min-h-screen mx-auto flex flex-col  max-w-[1440px] relative">
             <AdsComponent onAdClosed={() => console.log('Ad closed')} />
-            <header className="w-full h-[76px]">
+            <header
+               className={`w-full h-[76px] bg-white sticky top-0 z-50 transition-shadow duration-300 ${scrolled ? 'shadow-xl' : ''}`}
+            >
                <Header />
             </header>
             <div className="grow relative w-full">

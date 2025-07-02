@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
+import { Autoplay, EffectFade, Pagination, Navigation } from 'swiper/modules';
 import ImageWrapper from '../ImageWrapper';
 
 const slides = [
@@ -38,7 +38,7 @@ function SwiperComponent() {
             navigation={true}
             pagination={{ clickable: true }}
             loop={true}
-            modules={[Autoplay, EffectFade, Pagination]}
+            modules={[Autoplay, EffectFade, Pagination, Navigation]}
          >
             {slides.map((slide) => (
                <SwiperSlide key={slide.id}>
