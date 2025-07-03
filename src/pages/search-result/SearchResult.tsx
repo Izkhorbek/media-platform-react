@@ -1,15 +1,29 @@
-import { categories } from '@/constants';
-import { ArrowBack, ExpandLess, ExpandMore, Inbox } from '@mui/icons-material';
+import CardComponent from '@/components/CardComponent';
+import {
+   categories,
+   exampleData,
+   type ICardComponentPropsWithId,
+} from '@/constants';
+import type { ICardComponentProps } from '@/interface/ICardComponentProps';
+import {
+   ArrowBack,
+   Check,
+   ExpandLess,
+   ExpandMore,
+   Inbox,
+} from '@mui/icons-material';
 import {
    Box,
    Checkbox,
    Collapse,
    IconButton,
+   Input,
    List,
    ListItem,
    ListItemButton,
    ListItemIcon,
    ListItemText,
+   Slider,
    Typography,
 } from '@mui/material';
 import { useState } from 'react';
@@ -19,12 +33,15 @@ import { useState } from 'react';
 
 export const filterList = {
    categories: categories,
-   priceRange: [
-      { id: 1, label: '0 - 500 ming so‘m', min: 0, max: 500_000 },
-      { id: 2, label: '500 ming - 1 mln', min: 500_000, max: 1_000_000 },
-      { id: 3, label: '1 mln - 5 mln', min: 1_000_000, max: 5_000_000 },
-      { id: 4, label: '5 mln dan yuqori', min: 5_000_000, max: Infinity },
-   ],
+   priceRange: {
+      priceMin: 0,
+      priceMax: 100,
+      selectedRange: [0, 100],
+      marks: [
+         { value: 0, label: '0' },
+         { value: 100, label: '100-mln' },
+      ],
+   },
    brands: [
       {
          id: 1,
@@ -57,31 +74,29 @@ export const filterList = {
          value: "O'zAutoElektro",
       },
    ],
-   warranty: [
-      { label: '1 yil', value: '1' },
-      { label: '2 yil', value: '2' },
-      { label: '3 yil+', value: '3+' },
-   ],
-   sizeOrPower: [
-      { label: 'Kichik', value: 'mini' },
-      { label: 'O`rtacha', value: 'medium' },
-      { label: 'Yirik / Sanoat', value: 'industrial' },
+   warranties: [
+      { id: 1, label: '1 yil', value: '1' },
+      { id: 2, label: '2 yil', value: '2' },
+      { id: 3, label: '3 yil+', value: '3+' },
    ],
 };
 
 export const sortOptions = [
-   { label: 'Eng yangi', value: 'newest' },
-   { label: 'Ishlatilgan', value: 'used' },
-   { label: 'Narxi: pastdan yuqoriga', value: 'price-asc' },
-   { label: 'Narxi: yuqoridan pastga', value: 'price-desc' },
-   { label: 'Eng ko`p ko`rilgan', value: 'views' },
-   { label: 'Eng ko`p sotilgan', value: 'bestseller' },
-   { label: 'Reytingi yuqori', value: 'rating' },
+   { id: 1, label: 'Eng yangi', value: 'newest' },
+   { id: 2, label: 'Ishlatilgan', value: 'used' },
+   { id: 3, label: 'Eng ko`p ko`rilgan', value: 'views' },
+   { id: 4, label: 'Eng ko`p sotilgan', value: 'bestseller' },
+   { id: 5, label: 'Reytingi yuqori', value: 'rating' },
 ];
+
+function valuetext(value: number) {
+   return `${value}so'm`;
+}
 
 function SearchResult() {
    const [openCategory, setOpenCategory] = useState(true);
    const [checked, setChecked] = useState([0]);
+   const [selectedRange, setSelectedRange] = useState<number[]>([1, 100]);
 
    const handleToggle = (value: number) => () => {
       const currentIndex = checked.indexOf(value);
@@ -95,11 +110,17 @@ function SearchResult() {
 
       setChecked(newChecked);
    };
+
+   // Slider handler
+   const handleChange = (event: Event, newValue: number[]) => {
+      setSelectedRange(newValue);
+   };
+
    return (
       <Box
          sx={{
             display: 'grid',
-            gridTemplateColumns: '2fr 5fr',
+            gridTemplateColumns: '2fr 6fr',
             gridTemplateRows: '40px 1fr',
             minHeight: '60vh',
          }}
@@ -130,23 +151,26 @@ function SearchResult() {
          {/* Filter */}
          <Box
             sx={{
-               border: '1px solid red',
                display: 'flex',
                flexDirection: 'column',
                width: '100%',
-               px: '32px',
+               paddingRight: '32px',
             }}
          >
-            <List>
+            <List sx={{ pb: '30px' }}>
                <ListItemButton
                   sx={{}}
                   divider
                   onClick={() => setOpenCategory(!openCategory)}
                >
-                  <ListItemIcon>
-                     <Inbox />
-                  </ListItemIcon>
-                  <ListItemText primary="Categories" />
+                  <Typography
+                     variant="h6"
+                     sx={{ flexGrow: 1 }}
+                     component="div"
+                     fontWeight={600}
+                  >
+                     Kategoriyalar
+                  </Typography>
                   {openCategory ? <ExpandLess /> : <ExpandMore />}
                </ListItemButton>
                <Collapse in={openCategory} timeout="auto" unmountOnExit>
@@ -164,41 +188,87 @@ function SearchResult() {
                   </List>
                </Collapse>
 
-               {/*Pricing */}
+               {/* Holati */}
                <ListItem divider sx={{ mt: '10px' }}>
-                  <ListItemText primary="Narxi bo'yicha qidirish" />
+                  <Typography
+                     variant="h6"
+                     sx={{ flexGrow: 1 }}
+                     component="div"
+                     fontWeight={600}
+                  >
+                     Holati
+                  </Typography>
                </ListItem>
-               {filterList.priceRange.map((range) => (
-                  <ListItem key={range.label} disablePadding sx={{ pl: 2 }}>
-                     <ListItemButton
-                        sx={{ padding: '0px' }}
-                        role={undefined}
-                        onClick={handleToggle(range.id)}
-                     >
+               {sortOptions.map((option) => (
+                  <ListItem key={option.label} disablePadding sx={{ pl: 2 }}>
+                     <ListItemButton sx={{ paddingY: '0px' }}>
                         <ListItemIcon sx={{ minWidth: '32px' }}>
                            <Checkbox
                               edge="start"
-                              checked={checked.indexOf(range.id) !== -1}
+                              onClick={handleToggle(option.id)}
+                              checked={checked.indexOf(option.id) !== -1}
                               tabIndex={-1}
                               disableRipple
-                              sx={{ 'aria-labelledby': range.label }}
+                              sx={{
+                                 'aria-labelledby': option.value,
+                              }}
                            />
                         </ListItemIcon>
-                        <ListItemText secondary={range.label} />
+                        <ListItemText secondary={option.label} />
                      </ListItemButton>
                   </ListItem>
                ))}
 
+               {/*Pricing */}
+               <ListItem divider sx={{ mt: '10px' }}>
+                  <Typography
+                     variant="h6"
+                     sx={{ flexGrow: 1 }}
+                     component="div"
+                     fontWeight={600}
+                  >
+                     Narxi bo'yicha qidirish
+                  </Typography>
+               </ListItem>
+               <ListItem disablePadding sx={{ pl: 2, mt: '64px' }}>
+                  <ListItemIcon sx={{ width: '100%' }}>
+                     <Slider
+                        getAriaValueText={valuetext}
+                        getAriaLabel={() => 'Temperature range'}
+                        min={filterList.priceRange.priceMin}
+                        max={filterList.priceRange.priceMax}
+                        value={selectedRange}
+                        onChange={handleChange}
+                        disableSwap
+                        valueLabelDisplay="on"
+                        marks={[
+                           ...filterList.priceRange.marks,
+                           // {
+                           //    value: selectedRange[1],
+                           //    label: `${selectedRange[1]} mln`,
+                           // },
+                        ]}
+                     ></Slider>
+                  </ListItemIcon>
+               </ListItem>
                {/*Brands */}
                <ListItem divider sx={{ mt: '10px' }}>
-                  <ListItemText primary="Brend bo'yicha qidirish" />
+                  <Typography
+                     variant="h6"
+                     sx={{ flexGrow: 1 }}
+                     component="div"
+                     fontWeight={600}
+                  >
+                     Brend bo'yicha qidirish
+                  </Typography>
                </ListItem>
                {filterList.brands.map((brand) => (
                   <ListItem key={brand.label} disablePadding sx={{ pl: 2 }}>
-                     <ListItemButton sx={{ padding: '0px' }}>
+                     <ListItemButton sx={{ paddingY: '0px' }}>
                         <ListItemIcon sx={{ minWidth: '32px' }}>
                            <Checkbox
                               edge="start"
+                              onClick={handleToggle(brand.id)}
                               checked={checked.indexOf(brand.id) !== -1}
                               tabIndex={-1}
                               disableRipple
@@ -212,15 +282,69 @@ function SearchResult() {
                   </ListItem>
                ))}
 
-               {/*Brands */}
+               {/*warranty */}
                <ListItem divider sx={{ mt: '10px' }}>
-                  <ListItemText primary="Brend bo'yicha qidirish" />
+                  <Typography variant="h6" component="div" fontWeight={600}>
+                     Garantiya bo'yicha qidirish
+                  </Typography>
                </ListItem>
+               {filterList.warranties.map((warranty) => (
+                  <ListItem disablePadding sx={{ pl: 2 }}>
+                     <ListItemButton sx={{ paddingY: '0px' }}>
+                        <ListItemIcon sx={{ minWidth: '32px' }}>
+                           <Checkbox
+                              edge="start"
+                              onClick={handleToggle(warranty.id)}
+                              checked={checked.indexOf(warranty.id) !== -1}
+                              tabIndex={-1}
+                              disableRipple
+                              sx={{
+                                 'aria-labelledby': warranty.label,
+                              }}
+                           />
+                        </ListItemIcon>
+                        <ListItemText secondary={warranty.label} />
+                     </ListItemButton>
+                  </ListItem>
+               ))}
             </List>
          </Box>
 
          {/* Product List */}
-         <Box sx={{ border: '1px solid red' }}></Box>
+         <Box
+            sx={{
+               display: 'flex',
+               flexDirection: 'column',
+            }}
+         >
+            <Box
+               sx={(theme) => ({
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(4, minmax(256px, 1fr))',
+                  gap: '8px',
+                  paddingBottom: '128px',
+                  [theme.breakpoints.down('lg')]: {
+                     gridTemplateColumns: 'repeat(4, minmax(256px, 1fr))',
+                  },
+                  [theme.breakpoints.down('md')]: {
+                     gridTemplateColumns: 'repeat(3, minmax(256px, 1fr))',
+                  },
+                  [theme.breakpoints.down('sm')]: {
+                     gridTemplateColumns: 'repeat(2, minmax(256px, 1fr))',
+                  },
+                  [theme.breakpoints.down('xs')]: {
+                     gridTemplateColumns: 'repeat(1, minmax(256px, 1fr))',
+                  },
+               })}
+            >
+               {exampleData.map((product: ICardComponentPropsWithId) => {
+                  // Destructure the id and rest of the properties
+                  const { id, ...rest } = product;
+
+                  return <CardComponent key={product.id} {...rest} />;
+               })}
+            </Box>
+         </Box>
       </Box>
    );
 }

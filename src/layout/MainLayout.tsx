@@ -34,7 +34,7 @@ function MainLayout() {
                <Outlet />
             </div>
             <footer className="bg-gray-100 h-[256px]">
-               <div className="grid grid-cols-2 text-gray-500 text-sm  p-4">
+               <div className="grid grid-cols-2 text-gray-500 text-sm ">
                   {/*Left Side  */}
                   <div className="flex flex-col p-4">
                      <div className="flex-1 flex flex-col justify-center items-center ">
