@@ -4,7 +4,7 @@ import {
    exampleData,
    type ICardComponentPropsWithId,
 } from '@/constants';
-import type { ICardComponentProps } from '@/interface/ICardComponentProps';
+import type { ICardComponentProps } from '@/interface';
 import {
    ArrowBack,
    Check,

@@ -1,6 +1,6 @@
 import CardComponent from '@/components/CardComponent';
 import { categories } from '@/constants';
-import type { ICardComponentProps } from '@/interface/ICardComponentProps';
+import type { ICardComponentProps } from '@/interface';
 import { LocalFireDepartment, NavigateBefore, Star } from '@mui/icons-material';
 import { Box, Icon, Link, Typography } from '@mui/material';
 

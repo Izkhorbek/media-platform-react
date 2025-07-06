@@ -10,7 +10,7 @@ import FactoryIcon from '@mui/icons-material/Factory';
 import DeckIcon from '@mui/icons-material/Deck';
 import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices';
 import { type SvgIconComponent } from '@mui/icons-material';
-import type { ICardComponentProps } from '@/interface/ICardComponentProps';
+import type { ICardComponentProps } from '@/interface';
 
 export interface INavbarItem {
    id: string | number;

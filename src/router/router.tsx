@@ -30,7 +30,7 @@ const router = createBrowserRouter([
             Component: CategoryProducts,
          },
          {
-            path: '/search',
+            path: '/search/:query',
             Component: SearchResults,
          },
          {

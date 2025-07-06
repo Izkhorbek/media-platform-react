@@ -1,10 +1,13 @@
 import Button from '@mui/material/Button';
+import { Link } from 'react-router';
 
 function Header() {
    return (
       <div className="w-full h-full flex justify-between items-center px-4 text-white border-2">
          <div className="flex items-center text-primary">
-            <span className="text-[40px] font-bold">Mahalliy Market</span>
+            <Link to="/" style={{ fontSize: '40px', fontWeight: 'bold' }}>
+               Mahalliy Market
+            </Link>
          </div>
          <div className="flex items-center gap-8 ">
             <Button
@@ -18,7 +21,7 @@ function Header() {
                   width: '100px',
                }}
             >
-               Sign up
+               <Link to={'/signup'}> Sign up</Link>
             </Button>
             <Button
                variant="contained"
@@ -30,7 +33,7 @@ function Header() {
                   width: '100px',
                }}
             >
-               Log in
+               <Link to={'/login'}>Log in</Link>
             </Button>
          </div>
       </div>
