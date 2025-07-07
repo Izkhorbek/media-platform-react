@@ -1,12 +1,3 @@
-export interface ICardComponentProps {
-   imageUrl: string;
-   title: string;
-   description: string;
-   price: string | number;
-   quantity: string | number;
-   onClickLiked?: () => void;
-}
-
 export interface Product {
    id: number;
    name: string;
@@ -32,3 +23,34 @@ export interface ProductModalProps {
    onAddToCart: (id: number) => void;
    isInWishlist: boolean;
 }
+
+export interface CardComponentProps {
+   product: Product;
+   onClick: (id: number) => void;
+   onViewDetails: (id: number) => void;
+   onAddToCart: (id: number) => void;
+}
+
+export type ImageProps = {
+   src: string;
+   alt?: string;
+   className?: string;
+   style?: React.CSSProperties;
+   onClick?: (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => void;
+   loading?: 'lazy' | 'eager';
+};
+
+export type CommentProps = {
+   id: string;
+   userId: string;
+   content: string;
+   createdAt: string;
+   updatedAt: string;
+   user?: {
+      id: string;
+      username: string;
+      avatarUrl?: string;
+   };
+   replies?: CommentProps[];
+   imageUrls?: string[];
+};

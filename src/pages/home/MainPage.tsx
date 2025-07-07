@@ -7,6 +7,8 @@ import CardComponent from '@/components/CardComponent';
 import { Button } from '@mui/material';
 import ProductModal from '@/components/ProductModal';
 import { useState } from 'react';
+import type { Product } from '@/interface';
+import type { on } from 'events';
 
 const Tags: string[] = ['tag1', 'tag2', 'tag3', 'tag4', 'tag5'];
 
@@ -39,7 +41,7 @@ const modalProduct = {
 };
 
 function MainPage() {
-   const [openModal, setOpenModal] = useState(true);
+   const [openModal, setOpenModal] = useState(false);
 
    return (
       <>
@@ -79,8 +81,16 @@ function MainPage() {
                   <div
                      className={`grid grid-cols-5 ${exampleData.length < 10 ? 'grid-rows-1' : 'grid-rows-2'} gap-x-4 gap-y-8 mx-auto`}
                   >
-                     {exampleData.slice(0, 10).map((item, index) => (
-                        <CardComponent {...item} key={index} />
+                     {exampleData.slice(0, 10).map((item: Product, index) => (
+                        <CardComponent
+                           key={index}
+                           product={item}
+                           onClick={(id) => console.log('Click', id)}
+                           onViewDetails={() => setOpenModal(true)}
+                           onAddToCart={(id) => {
+                              console.log('Add to cart', id);
+                           }}
+                        />
                      ))}
                   </div>
                   <div className="flex justify-end pt-4">

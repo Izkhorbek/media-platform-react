@@ -1,14 +1,10 @@
 import { Box, Button, CardContent, CardMedia, Typography } from '@mui/material';
 import Card from '@mui/material/Card';
-import type { ICardComponentProps } from '@/interface';
+import type { CardComponentProps } from '@/interface';
 import { RemoveRedEye, ShoppingCartOutlined, Star } from '@mui/icons-material';
 import { formatPrice } from '@/utils';
 
-function CardComponent({ props }: ICardComponentProps) {
-   function setSelectedProduct(product: any): void {
-      throw new Error('Function not implemented.');
-   }
-
+function CardComponent(props: CardComponentProps) {
    function onAddToCart(id: any): void {
       throw new Error('Function not implemented.');
    }
@@ -28,6 +24,7 @@ function CardComponent({ props }: ICardComponentProps) {
          }}
       >
          <CardMedia
+            onClick={() => props.onClick(props.product.id)}
             sx={{
                objectFit: 'cover',
                height: 240,
@@ -104,7 +101,7 @@ function CardComponent({ props }: ICardComponentProps) {
                <Button
                   variant="outlined"
                   size="small"
-                  onClick={() => setSelectedProduct('product')}
+                  onClick={() => props.onViewDetails(props.product.id)}
                   startIcon={<RemoveRedEye />}
                   sx={{ flex: 1 }}
                >
@@ -113,7 +110,7 @@ function CardComponent({ props }: ICardComponentProps) {
                <Button
                   variant="contained"
                   size="small"
-                  onClick={() => onAddToCart('product.id')}
+                  onClick={() => props.onAddToCart(props.product.id)}
                   startIcon={<ShoppingCartOutlined />}
                   sx={{ flex: 1 }}
                >
